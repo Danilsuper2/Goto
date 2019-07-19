@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from myapp.views import win, alisa
+from myapp.views import win, alisa, alisa2, alisa0
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^you_win/', win),
-    url(r'^alisa/', alisa)
+    url(r'^alisa/write', alisa),
+    url(r'^alisa/read', alisa2),
+    url(r'^alisa/new', alisa0)
 ]

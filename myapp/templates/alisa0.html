@@ -24,30 +24,22 @@
             </div>
         </nav>
         <div class="container">
-            <div class="card">
-                <div class="card-body">
-                    <h1>
-                        {{ name }}
-                    </h1>
-                    <main>
-                    {{ poem }}
-                    </main>
-                </div>
-            </div>
-            <h3>Продолжить рассказ:</h3>
+            <h3>Предложить начало поэмы:</h3>
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="Name">Ваше имя:</label>
-                    <input class="form-control" name="name" placeholder="Иван Иванович Иванов (Не больше 30 символов)">
+                    <input class="form-control" name="people" placeholder="Иван Иванович Иванов (Не больше 30 символов)">
                 </div>
                 <div class="form-group">
-                    <label for="Text">Продолжение:</label>
+                    <label for="Name">Название поэмы:</label>
+                    <input class="form-control" name="name" placeholder="(Не больше 50 символов)">
+                </div>
+                <div class="form-group">
+                    <label for="Text">Начало:</label>
                     <textarea class="form-control" name=text rows="10"></textarea>
                 </div>
-                <input type="hidden" name=id value={{ id }}>
-                <button type="send" name=button value=add class="btn btn-success">Добавить абзац</button>
-                <button type="send" name=button value=end class="btn btn-primary">Закончить рассказ</button>
+                <button type="send" name=button class="btn btn-success">Начать рассказ</button>
                 <small id="modern" class="form-text text-muted">Всё предложенное вами НЕ проходит модернизацию. Просьба относиться к поэме вежливо!</small>
             </form>
         </div>
