@@ -25,7 +25,9 @@ def alisa(request):
         poems = list(Poem.objects.filter(ended = False))
         if len(poems) == 0:
             return redirect('/alisa/new')
-        poem = random.choice(poems)
+        return render(request, 'alisa4.html', {'list': poems})
+    elif request.POST['button'] == 'get':
+        poem = Poem.objects.get(id = request.POST['id'])
         return render(request, 'alisa.html', {'poem': poem.text, 'id': poem.id, 'name': poem.name})
     else:
         abzac = Abzac()
@@ -60,8 +62,8 @@ def win(request):
         name = request.POST['name']
         prize = request.POST['prize']
         image = request.POST['image']
-        out = open('rw', 'out.txt')
-        out.write(name+' '+prize)
+        out = open('out.txt', 'a')
+        out.write(name+' '+prize+'\n')
         out.close()
         if name == '':
             return render(request, 'index.html', {'prize': prize, 'image': image})

@@ -1,0 +1,60 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+<div class="container">
+    <p>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="name">Название:</label>
+                <input type="text" class="form-control" id="name" maxlength="20" name=name placeholder="Название проблемы" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="location">Место:</label>
+                <input type="text" class="form-control" id="location" maxlength="20" name=location placeholder="Место проблемы" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-8 mb-3">
+                <label for="text">Описание</label>
+                <input type="text" class="form-control" id="text" maxlength="50" name=text placeholder="Проблема, но подробнее" required>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Отправить</button>
+    </form>
+    <h2>
+        <p class="text-center">
+            Все ваши заявки
+        </p>
+    </h2>
+    <div class="card-columns">
+        {% for i in list %}
+            {% if not i.status_read %}
+                <div class="card border-danger mb-3" style="max-width: 22rem;">
+                   <div class="card-header">На расмотрении</div>
+                    <div class="card-body text-danger">
+            {% else %}
+                {% if not i.status_complate %}
+                    <div class="card border-warning mb-3" style="max-width: 22rem;">
+                        <div class="card-header">Выполняется</div>
+                        <div class="card-body text-warning">
+                {% else %}
+                    <div class="card border-success mb-3" style="max-width: 22rem;">
+                        <div class="card-header">Выполнено</div>
+                        <div class="card-body text-success">
+                {% endif %}
+            {% endif %}
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text">
+                        <small class="form-text text-muted">
+                            {{ i.text_in }}
+                        </small>
+                        {{ i.text_out }}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

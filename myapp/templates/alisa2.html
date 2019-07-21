@@ -1,21 +1,92 @@
-{% extends 'baze.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>БОБРО ПОЖАЛОВАТЬ!</title>
+        <meta charset="utf-8"/>
+        <script type="text/javascript">
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
-{% block content %}
-<div class="container">
-    <h3>{{ name }}</h3>
-    {% for i in list %}
-        <p>
-        <div class="card">
-            <div class="card-body">
-                {{ i.text }}
-                <small id="modern" class="form-text text-muted">{{ i.people }}</small>
+            async function changeText()
+            {
+                while (true)
+                {
+                for(var i=1; i<=7; i++)
+                    {
+                        if(i == "1")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: red');
+                        }
+                        if(i == "2")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: orange');
+                        }
+                        if(i == "3")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: yellow');
+                        }
+                        if(i == "4")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: green');
+                        }
+                        if(i == "5")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: blue');
+                        }
+                        if(i == "6")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: indigo');
+                        }
+                        if(i == "7")
+                        {
+                            document.getElementById('pText').setAttribute('style', 'color: purple');
+                        }
+                    await sleep(200);
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand">Коллективный разум</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/alisa/write">Писать<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/alisa/read">Читать<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/alisa/new">Начать<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
             </div>
+        </nav>
+        <div class="container">
+            <h3 id="pText">{{ name }}</h3>
+            {% for i in list %}
+                <p>
+                <div class="card">
+                    <div class="card-body">
+                        {{ i.text }}
+                        <small id="modern" class="form-text text-muted">{{ i.people }}</small>
+                    </div>
+                </div>
+            {% endfor %}
+            <input type="button" value="Эта кнопка меняет цвет текста" id="b3" onclick=changeText();//>
+            <p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name = button value = back class="btn btn-outline-info">Выбрать историю</button>
+            </form>
         </div>
-    {% endfor %}
-    <p>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit" name = button value = back class="btn btn-outline-info">Выбрать историю</button>
-    </form>
-</div>
-{% endblock %}
+    </body>
+</html>

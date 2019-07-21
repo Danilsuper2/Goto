@@ -1,0 +1,40 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+<p>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Никнайм</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">id:</div>
+                    </div>
+                    <input type="login" class="form-control" id="inlineFormInputGroup" name = username placeholder="Никнейм">
+                </div>
+            </div>
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInput">Name</label>
+                <input type="password" class="form-control mb-2" id="inlineFormInput" name = password placeholder="Пароль">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Залогинуться</button>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-success mb-2" href="/fix/reg" role="button">Зарегаться</a>
+            </div>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <div class="alert alert-warning" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

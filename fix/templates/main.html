@@ -1,0 +1,65 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Добро пожаловать, {{ username }}!</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="send" name=button value=log_out class="btn btn-success">Выйти</button>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <div class="alert alert-warning" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2>
+        <p class="text-center">
+            Все заявки
+        </p>
+    </h2>
+    <div class="card-columns">
+        {% for i in list %}
+            {% if not i.status_read %}
+            <div class="card border-danger mb-3" style="max-width: 22rem;">
+                <div class="card-header">На расмотрении</div>
+                <div class="card-body text-danger">
+            {% else %}
+                {% if not i.status_complate %}
+                    <div class="card border-warning mb-3" style="max-width: 22rem;">
+                    <div class="card-header">Выполняется</div>
+                    <div class="card-body text-warning">
+                {% else %}
+                    <div class="card border-success mb-3" style="max-width: 22rem;">
+                    <div class="card-header">Выполнено</div>
+                    <div class="card-body text-success">
+                {% endif %}
+            {% endif %}
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text">
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            {{ i.text_in }}
+                        </small>
+                        {{ i.text_out }}
+                    </p>
+                    {% if not i.status_complate %}
+                    <nav aria-label="likes">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="/fix/like?id={{ i.id }}&like=-2"><img src="https://vk.com/emoji/e/e298b9_2x.png" width="17" height="17" alt=""></a></li>
+                            <li class="page-item"><a class="page-link" href="/fix/like?id={{ i.id }}&like=-1"><img src="https://vk.com/emoji/e/f09f9895_2x.png" width="17" height="17" alt=""></a></li>
+                            <li class="page-item"><a class="page-link" href="/fix/like?id={{ i.id }}&like=0"><img src="https://vk.com/emoji/e/f09f9890_2x.png" width="17" height="17" alt=""></a></li>
+                            <li class="page-item"><a class="page-link" href="/fix/like?id={{ i.id }}&like=1"><img src="https://vk.com/emoji/e/f09f9982_2x.png" width="17" height="17" alt=""></a></li>
+                            <li class="page-item"><a class="page-link" href="/fix/like?id={{ i.id }}&like=2"><img src="https://vk.com/emoji/e/f09f9884_2x.png" width="17" height="17" alt=""></a></li>
+                            <li class="page-item"><a class="page-link">{{ i.likeint }}</a></li>
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
