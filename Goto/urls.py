@@ -17,6 +17,7 @@ from django.urls import path
 from django.contrib import admin
 from myapp.views import win, alisa, alisa2, alisa0
 from fix.views import main, log_in, reg, cab, like
+#from rost.views import api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('fix/login/', log_in),
     path('fix/reg/', reg),
     path('fix/cab/', cab),
-    path('fix/like/', like)
+    path('fix/like/', like),
+    #path('api/', api)
 ]
