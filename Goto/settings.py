@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
-    'fix'
+    'fix',
+    'rost'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,8 @@ MEDIA_ROOT = u'/home/Danil118312/Goto/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = u'/home/Danil118312/Goto/static'
 STATIC_URL = '/static/'
+
+import django
+django.setup()
+
+

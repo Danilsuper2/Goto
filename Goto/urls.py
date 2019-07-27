@@ -17,10 +17,11 @@ from django.urls import path
 from django.contrib import admin
 from myapp.views import win, alisa, alisa2, alisa0
 from fix.views import main, log_in, reg, cab, like
-#from rost.views import api
+from rost.views import api, api1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/api', api),
     path('you_win/', win),
     path('alisa/write/', alisa),
     path('alisa/read/', alisa2),
@@ -30,5 +31,5 @@ urlpatterns = [
     path('fix/reg/', reg),
     path('fix/cab/', cab),
     path('fix/like/', like),
-    #path('api/', api)
+    path('api/', api1)
 ]
